@@ -68,7 +68,7 @@ main {
 #right-side {
     flex: 1;
     border: 1px solid #ccc;
-    padding-left: 20px;
+    padding: 20px;
 }
 
 .facts {
@@ -78,6 +78,35 @@ main {
     text-align: center;
     border: 1px solid #ccc;
     margin: 0 20px;
+}
+
+.map-container {
+  width: min(70vw, 1400px);
+  margin: 0 auto;
+}
+
+.map-overlay {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#city-map {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    outline: 5px solid red;
+}
+
+.viewpoly {
+    fill: rgba(255, 230, 120, 0);
+    stroke: rgba(255, 230, 120, 0);
+    stroke-width: 2;
+    stroke-linejoin: round;  
+    stroke-linecap: round;    
+    cursor: pointer;
 }
 
 
