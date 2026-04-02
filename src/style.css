@@ -1,0 +1,144 @@
+/* style.css */
+
+
+
+/* ----------------------- */
+/* HEADER BAR (navigation) */
+/* ----------------------- */
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+header ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#auth-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#site-logo {
+    height: 100px;
+    width: auto;
+    margin: 0;
+}
+
+
+
+/* ----------------------- */
+/*   HOME PAGE (content)   */
+/* ----------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+#left-side {
+    flex: 2;
+}
+
+#right-side {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.facts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 20px;
+}
+
+.map-container {
+    width: min(70vw, 1400px);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.map-overlay {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#city-map {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    outline: 5px solid red;
+}
+
+.viewpoly {
+    fill: rgba(255, 230, 120, 0);
+    stroke: rgba(255, 230, 120, 0);
+    stroke-width: 2;
+    stroke-linejoin: round;  
+    stroke-linecap: round;    
+    cursor: pointer;
+}
+
+
+
+/* ----------------------- */
+/* FOOTER BAR (navigation) */
+/* ----------------------- */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+footer a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #333;
+}
+
+footer p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
