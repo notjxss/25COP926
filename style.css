@@ -81,8 +81,9 @@ main {
 }
 
 .map-container {
-  width: min(70vw, 1400px);
-  margin: 0 auto;
+    width: min(70vw, 1400px);
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .map-overlay {
