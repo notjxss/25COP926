@@ -80,6 +80,15 @@ header a {
     padding: 20px;
 }
 
+#register {
+    width: 280px;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+}
+
 
 
 /* ----------------------- */

@@ -38,7 +38,7 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id="register">
       <h2>Create an Account</h2>
 
       <input
