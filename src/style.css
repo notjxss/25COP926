@@ -26,11 +26,6 @@ header a {
     font-weight: bold;
 }
 
-#auth-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
 
 #logo {
     display: flex;
@@ -42,6 +37,47 @@ header a {
     height: 100px;
     width: auto;
     margin: 0;
+}
+
+/* -------------------------- */
+/*   ACCOUNT AUTHENTICATION   */
+/* -------------------------- */
+
+#auth-buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.auth-logged-out {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.auth-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 4px 6px;
+    transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+    color: #ff0000;
+}
+
+.divider {
+    color: #aaa;
+}
+
+#sign-in {
+    width: 280px;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
 }
 
 
@@ -116,19 +152,19 @@ main {
 /* FOOTER BAR (navigation) */
 /* ----------------------- */
 footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
 }
 
 footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
 }
 
 footer a {
@@ -138,7 +174,7 @@ footer a {
 }
 
 footer p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
+    margin: 0;
+    font-size: 12px;
+    color: #666;
 }
