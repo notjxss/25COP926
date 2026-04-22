@@ -11,42 +11,48 @@ export default function Login() {
     password: "",
   });
 
+  const [error, setError] = useState(""); // NEW
+
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+    setError(""); // clear error when typing
   };
 
-  /* use asynch to allow login function to pause without blocking any of the site */
   const handleSubmit = async (e) => {
-    /* stop form from refreshing page on submit */
     e.preventDefault();
 
+    try {
+      const res = await fetch("/backend/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    /* send login request to server with form data, if successful store user and redirect to profile page, otherwise show error message */
-    const res = await fetch("http://localhost:3001/login", {
-      method: "POST",
-      /* send form data as JSON */
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+      const data = await res.json();
 
-    /* format response as JSON */
-    const data = await res.json();
+      if (res.ok) {
+        login(data.firstname);
+        navigate("/profile");
+      } else {
+        setError(data.error || "Login failed"); // NEW
+      }
 
-    /* if flask returns 400/401, show error, otherwise user is logged in and redirected */
-    if (res.ok) {
-      login(data.firstname);   // store first name
-      navigate("/profile");    // redirect to account page
-    } else {
-      alert(data.error);
+    } catch (err) {
+      console.error("Network error:", err);
+      setError("Cannot reach backend"); // NEW
     }
   };
 
   return (
     <form onSubmit={handleSubmit} id="sign-in">
       <h2>Sign In</h2>
+
+      {error && (
+        <div className="error-box">{error}</div>   // NEW
+      )}
 
       <input
         name="username"
@@ -61,9 +67,12 @@ export default function Login() {
         value={form.password}
         onChange={handleChange}
         placeholder="Password"
+        className={error === "Wrong password" ? "error-input" : ""}
       />
 
       <button type="submit">Sign In</button>
+
+      <p>Don't have an account? <a href="/register">Register here</a></p>
     </form>
   );
 }
