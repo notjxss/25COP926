@@ -11,18 +11,26 @@ export default function Login() {
     password: "",
   });
 
-  const [error, setError] = useState(""); // NEW
+  const [error, setError] = useState("");
+  const [errorField, setErrorField] = useState("");
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
-    setError(""); // clear error when typing
+    setError("");
+    setErrorField("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!form.username || !form.password) {
+      setError("Please fill in all fields.");
+      setErrorField("missing");
+      return;
+    }
 
     try {
       const res = await fetch("/backend/login.php", {
@@ -37,12 +45,14 @@ export default function Login() {
         login(data.firstname);
         navigate("/profile");
       } else {
-        setError(data.error || "Login failed"); // NEW
+        setError(data.error || "Login failed");
+        setErrorField(data.error === "Wrong password" ? "password" : "username");
       }
 
     } catch (err) {
       console.error("Network error:", err);
-      setError("Cannot reach backend"); // NEW
+      setError("Cannot reach backend");
+      setErrorField("server");
     }
   };
 
@@ -50,15 +60,20 @@ export default function Login() {
     <form onSubmit={handleSubmit} id="sign-in">
       <h2>Sign In</h2>
 
-      {error && (
-        <div className="error-box">{error}</div>   // NEW
-      )}
+      {error && <div className="error-box">{error}</div>}
 
       <input
         name="username"
         value={form.username}
         onChange={handleChange}
         placeholder="Username"
+        className={
+          errorField === "missing" && !form.username
+            ? "error-input"
+            : errorField === "username"
+            ? "error-input"
+            : ""
+        }
       />
 
       <input
@@ -67,12 +82,20 @@ export default function Login() {
         value={form.password}
         onChange={handleChange}
         placeholder="Password"
-        className={error === "Wrong password" ? "error-input" : ""}
+        className={
+          errorField === "missing" && !form.password
+            ? "error-input"
+            : errorField === "password"
+            ? "error-input"
+            : ""
+        }
       />
 
       <button type="submit">Sign In</button>
 
-      <p>Don't have an account? <a href="/register">Register here</a></p>
+      <p>
+        Don't have an account? <a href="/register">Register here</a>
+      </p>
     </form>
   );
 }

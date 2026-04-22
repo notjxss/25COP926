@@ -9,6 +9,11 @@ export default function Register() {
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); 
+  const [errorField, setErrorField] = useState("");
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -16,24 +21,47 @@ export default function Register() {
       ...form,
       [e.target.name]: e.target.value,
     });
+    setError("");
+    setSuccess("");
+    setErrorField("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/backend/register.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    // basic validation
+    if (!form.username || !form.email || !form.password) {
+      setError("Please fill in all required fields.");
+      setErrorField("missing");
+      return;
+    }
 
-    const data = await res.json();
+    try {
+      const res = await fetch("/backend/register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    if (res.ok) {
-        alert("Account created!");
-        navigate("/profile");
-    } else {
-      alert(data.error);
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess("Account created!"); // NEW
+        setError("");
+
+        // optional: redirect after 1 second
+        setTimeout(() => navigate("/profile"), 1000);
+
+      } else {
+        setError(data.error || "Registration failed.");
+        setSuccess("");
+        setErrorField("server");
+      }
+
+    } catch (err) {
+      setError("Cannot reach backend.");
+      setSuccess("");
+      setErrorField("server");
     }
   };
 
@@ -41,11 +69,15 @@ export default function Register() {
     <form onSubmit={handleSubmit} id="register">
       <h2>Create an Account</h2>
 
+      {error && <div className="error-box">{error}</div>}
+      {success && <div className="success-box">{success}</div>}
+
       <input
         name="username"
         value={form.username}
         onChange={handleChange}
         placeholder="Username"
+        className={errorField === "missing" && !form.username ? "error-input" : ""}
       />
 
       <input
@@ -68,6 +100,7 @@ export default function Register() {
         value={form.email}
         onChange={handleChange}
         placeholder="Email"
+        className={errorField === "missing" && !form.email ? "error-input" : ""}
       />
 
       <input
@@ -76,6 +109,7 @@ export default function Register() {
         value={form.password}
         onChange={handleChange}
         placeholder="Password"
+        className={errorField === "missing" && !form.password ? "error-input" : ""}
       />
 
       <button type="submit">Register</button>
