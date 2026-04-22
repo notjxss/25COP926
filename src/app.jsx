@@ -14,21 +14,24 @@ import Station from "./pages/map-pages/station";
 
 import Header from "./components/header";
 import Footer from "./components/footer";
-import AuthPanel from "./auth/authpanel";
+
+import Register from "./auth/register";
+import Login from "./auth/login";
+import Logout from "./auth/logout";
 
 export default function App() {
   const [authMode, setAuthMode] = useState("none");
 
   return (
     <BrowserRouter>
-      <Header
-        onSignIn={() => setAuthMode("login")}
-        onRegister={() => setAuthMode("register")}
-      />
+      <Header />
 
-      <AuthPanel mode={authMode} setMode={setAuthMode} />
 
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/logout" element={<Logout />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/profile" element={<Profile />} />
@@ -39,6 +42,7 @@ export default function App() {
         <Route path="/fuels" element={<Fuels />} />
         <Route path="/townhall" element={<TownHall />} />
         <Route path="/station" element={<Station />} />
+
       </Routes>
 
       <Footer />

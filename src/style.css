@@ -10,6 +10,8 @@ header {
     flex-direction: column;
     gap: 10px;
     padding: 10px 20px;
+    font-family: "Inter", sans-serif;
+    margin-bottom: 20px;
 }
 
 header ul {
@@ -22,15 +24,24 @@ header ul {
 }
 
 header a {
+    padding: 6px 14px;
+    border-radius: 999px; 
+    background: transparent;
+    color: black;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-#auth-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+header a:hover {
+    background: #f0f0f0;
 }
+
+header a.active {
+    background: black;
+    color: white;
+}
+
 
 #logo {
     display: flex;
@@ -43,6 +54,98 @@ header a {
     width: auto;
     margin: 0;
 }
+
+/* -------------------------- */
+/*   ACCOUNT AUTHENTICATION   */
+/* -------------------------- */
+
+#auth-buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.auth-logged-out {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.auth-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 4px 6px;
+    transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+    color: #ff0000;
+}
+
+.divider {
+    color: #aaa;
+}
+
+form#sign-in, form#register {
+    width: 320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    font-family: "Inter", sans-serif;
+    background: #fafafa;
+    border-radius: 16px;
+}
+
+.error-box {
+    background: #ffe5e5;
+    border: 1px solid #ff6b6b;
+    color: #b30000;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.success-box {
+    background: #e6ffe6;
+    border: 1px solid #4caf50;
+    color: #1b5e20;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.error-input {
+    border: 2px solid #ff6b6b !important;
+    background: #fff5f5;
+}
+
+
+form#register input, form#sign-in input {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    background: #f5f5f5;
+    font-size: 16px;
+}
+
+form#register button, form#sign-in button {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: none;
+    background: black;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 
 
 
@@ -80,16 +183,24 @@ main {
     margin: 0 20px;
 }
 
+
+.map-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
 .map-container {
     width: min(70vw, 1400px);
     margin: 0 auto;
-    padding: 20px;
+    padding-right: 0px;
+    margin-right: 0px;
 }
 
 .map-overlay {
-  width: 100%;
-  height: auto;
-  display: block;
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 #city-map {
@@ -110,25 +221,43 @@ main {
     cursor: pointer;
 }
 
+.viewpoly:hover {
+    fill: rgba(243, 121, 99, 0.07);
+    stroke: rgba(243, 121, 99, 0.05);
+}
+
+
+.region-info-box {
+    width: 220px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-right: 20px;
+    background: #fafafa;
+    border-radius: 12px;
+    font-family: "Inter", sans-serif;
+    border: 1px solid #ddd;
+}
+
+
 
 
 /* ----------------------- */
 /* FOOTER BAR (navigation) */
 /* ----------------------- */
 footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
 }
 
 footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
 }
 
 footer a {
@@ -138,7 +267,7 @@ footer a {
 }
 
 footer p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
+    margin: 0;
+    font-size: 12px;
+    color: #666;
 }
