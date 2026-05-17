@@ -11,7 +11,7 @@ export default function AuthPanel() {
     <div className="auth-panel">
       {user ? (
         <div className="auth-logged-in">
-          <span>Hello {user.username}! </span>
+          <span>Hello {user.firstname}! </span>
           <span className="divider">|</span>
           <Link className="auth-link" to="/logout">Log Out</Link>
         </div>

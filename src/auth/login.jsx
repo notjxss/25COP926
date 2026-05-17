@@ -42,13 +42,20 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        login(data.firstname);
+        // Save to localStorage for persistence
+        localStorage.setItem("user_id", data.user_id);
+        localStorage.setItem("firstname", data.firstname);
+
+        // Update AuthContext
+        login(data.firstname, data.user_id);
+
         navigate("/profile");
       } else {
         setError(data.error || "Login failed");
-        setErrorField(data.error === "Wrong password" ? "password" : "username");
+        setErrorField(
+          data.error === "Wrong password" ? "password" : "username"
+        );
       }
-
     } catch (err) {
       console.error("Network error:", err);
       setError("Cannot reach backend");
