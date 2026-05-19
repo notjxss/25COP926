@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authcontext";
 import { useNavigate } from "react-router-dom";
 import BadgeTooltip from "../components/badgeTooltip";
+import FactBox from "../components/factBox";
 
 export default function Profile() {
   const { user } = useContext(AuthContext);
@@ -86,9 +87,14 @@ export default function Profile() {
   return (
     <main className="profile-layout">
       <div id="left-side">
+        <FactBox />
+        
+        <br />
+        
         <h1>Welcome back, {user.firstname}</h1>
 
         <div className="profile-stats">
+          <br />
           <h3>Stats</h3>
           <p>Total Visits: {stats.totalVisits}</p>
           <p>Most Visited Area: {stats.mostVisited}</p>
@@ -128,7 +134,7 @@ export default function Profile() {
                 setTooltip(t => ({ ...t, visible: false }));
               }}
             >
-              <img src={`/backend/badge_icons/${b.icon}`} alt={b.name} />
+              <img src={b.icon} alt={b.name} />
               <span>{b.name}</span>
             </div>
           ))}

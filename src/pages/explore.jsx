@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import roadMap from "../Images/road-map.png";
 import { AuthContext } from "../auth/authcontext";
+import FactBox from "../components/factBox";
 
 export default function Explore() {
   const { user } = useContext(AuthContext);
@@ -66,7 +67,7 @@ export default function Explore() {
               />
             </Link>
 
-            <Link to="/town-hall" onClick={() => logVisit("Town Hall")}>
+            <Link to="/townhall" onClick={() => logVisit("Town Hall")}>
               <polygon
                 points="898.8,690.2 1176.7,758.1 1208.2,847 1201.9,926.1 1071,926.1 888.3,868.7"
                 className="viewpoly"
@@ -86,7 +87,7 @@ export default function Explore() {
           </svg>
         </div>
 
-        <div className="region-info-box">
+        <div className="region-info-box card">
           {hoverRegion ? (
             <>
               <h3>{hoverRegion}</h3>
@@ -98,9 +99,7 @@ export default function Explore() {
         </div>
       </div>
 
-      <div className="facts">
-        <h2>temp text ayyayaya</h2>
-      </div>
+      <FactBox />
     </>
   );
 }

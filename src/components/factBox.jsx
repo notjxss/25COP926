@@ -11,7 +11,7 @@ export default function FactBox() {
 
   return (
     <div className="facts">
-      <p>{fact || "Failed to retrieve fact. :("}</p>
+      <h5>{fact || "Failed to retrieve fact. :("}</h5>
     </div>
   );
 }

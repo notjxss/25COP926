@@ -46,10 +46,10 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        setSuccess("Account created!"); // NEW
+        setSuccess("Account created!"); 
         setError("");
 
-        // optional: redirect after 1 second
+        // redirect after 1 second
         setTimeout(() => navigate("/profile"), 1000);
 
       } else {

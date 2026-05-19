@@ -29,6 +29,8 @@ $result = mysqli_stmt_get_result($stmt);
 $userBadges = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
+    // Prepend public badge path
+    $row['badge_icon'] = "/backend/badge_icons/" . $row['badge_icon'];
     $userBadges[] = $row;
 }
 
