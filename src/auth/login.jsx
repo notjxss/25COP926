@@ -6,14 +6,17 @@ export default function Login() {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // default form state
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
 
+  // UI feedback
   const [error, setError] = useState("");
   const [errorField, setErrorField] = useState("");
 
+  // update form + clear previous errors
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -24,8 +27,10 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
+    // stops from refreshing the page when the form is updated
     e.preventDefault();
 
+    // basic validation
     if (!form.username || !form.password) {
       setError("Please fill in all fields.");
       setErrorField("missing");
@@ -42,14 +47,33 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok) {
+<<<<<<< Updated upstream
         login(data.firstname);
+=======
+        // reuse login across refreshes
+        localStorage.setItem("user_id", data.user_id);
+        localStorage.setItem("firstname", data.firstname);
+
+        // update global auth state
+        login(data.firstname, data.user_id);
+
+>>>>>>> Stashed changes
         navigate("/profile");
       } else {
+        // backend rejected login (wrong password, unknown username, etc.)
         setError(data.error || "Login failed");
+<<<<<<< Updated upstream
         setErrorField(data.error === "Wrong password" ? "password" : "username");
+=======
+        setErrorField(
+          // highlight the field that caused the error
+          data.error === "Wrong password" ? "password" : "username"
+        );
+>>>>>>> Stashed changes
       }
 
     } catch (err) {
+      // network/server unreachable
       console.error("Network error:", err);
       setError("Cannot reach backend");
       setErrorField("server");

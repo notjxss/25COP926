@@ -1,3 +1,5 @@
+{/* entry point of the application, renders the app component and wraps it in the auth provider to provide authentication context to the entire app */}
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app.jsx";

@@ -7,9 +7,11 @@ export default function Logout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    logout();       // clear user from context
-    navigate("/");  // redirect to home
+    // clear user from context and local storage
+    logout();       
+    // redirect to home page
+    navigate("/");  
   }, []);
 
-  return null; // nothing to show
+  return null; 
 }

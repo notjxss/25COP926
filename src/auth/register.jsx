@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  // form state for controlled inputs
   const [form, setForm] = useState({
     username: "",
     firstname: "",
@@ -10,17 +11,21 @@ export default function Register() {
     password: "",
   });
 
+  // UI feedback states
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(""); 
   const [errorField, setErrorField] = useState("");
 
   const navigate = useNavigate();
 
+  // update form + clear previous messages
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+
+    // reset UI feedback when user edits the form
     setError("");
     setSuccess("");
     setErrorField("");
@@ -29,7 +34,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // basic validation
+    // basic client‑side validation, produces error if any required field is empty
     if (!form.username || !form.email || !form.password) {
       setError("Please fill in all required fields.");
       setErrorField("missing");
@@ -46,19 +51,26 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
+<<<<<<< Updated upstream
         setSuccess("Account created!"); // NEW
+=======
+        // backend accepted registration
+        setSuccess("Account created!"); 
+>>>>>>> Stashed changes
         setError("");
 
         // optional: redirect after 1 second
         setTimeout(() => navigate("/profile"), 1000);
 
       } else {
+        // backend returned an error (duplicate username, invalid email, etc.)
         setError(data.error || "Registration failed.");
         setSuccess("");
         setErrorField("server");
       }
 
     } catch (err) {
+      // network or server unreachable
       setError("Cannot reach backend.");
       setSuccess("");
       setErrorField("server");

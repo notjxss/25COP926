@@ -3,20 +3,47 @@ import { Link } from "react-router-dom";
 import roadMap from "../Images/road-map.png";
 
 export default function Explore() {
+  const { user } = useContext(AuthContext);
+
+  // which region the user is hovering over
   const [hoverRegion, setHoverRegion] = useState(null);
+
+  // logs a visit to backend (only if logged in)
+  const logVisit = (areaName) => {
+    if (!user) return;
+
+    fetch("/backend/logVisit.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user.id,
+        area_name: areaName
+      })
+    }).catch(err => console.error("Visit log failed:", err));
+  };
+
+  const regionInfo = {
+    "Park": `The park is a calm, green place full of trees, animals, and little hidden habitats. It is where nature does its thing and keeps the town feeling fresh and happy. Explore it to see how wildlife and people can share the same space.`,
+    "Supermarket": `The supermarket is where all our food choices begin. Some food is grown nearby and some travels from far away. Take a look around to discover how the way we shop can help the planet while still keeping meals fun and tasty.`,
+    "Fuel Station": `The power station shows how the town gets its energy. Some power is clean and renewable and some is not. Explore this area to see how different energy choices can change the world around us.`,
+    "Transport Station": `The transport station is full of movement with bikes, buses, cars, and trains all heading somewhere. Each one affects the planet in a different way. Check it out to learn how choosing greener travel can make the town cleaner and healthier.`,
+    "Town Hall": `The town hall is where important decisions are made. It is all about jobs, money, and planning what the town needs next. Explore this place to see how choices about work and budgets shape the whole community.`
+  };
 
   return (
     <>
       <div className="map-layout">
         <div className="map-container">
+          // svg overlay for the map
           <svg
             className="map-overlay"
             viewBox="0 0 1400 926.8"
             preserveAspectRatio="xMidYMid meet"
           >
             <image xlinkHref={roadMap} width="1400" height="926.8" />
-
-            <Link to="/park">
+            
+            {/* each polygon is clickable and redirects to relevant page, logs visit and shows info on hover */}
+            <Link to="/park" onClick={() => logVisit("Park")}>
               <polygon
                 points="557.2,76.3 623.7,280.7 735.7,495.6 722.4,569.1 66.5,711.9 67.2,621.6 193.9,513.1 319.2,299.6 412.3,139.3"
                 className="viewpoly"
@@ -63,7 +90,9 @@ export default function Explore() {
           </svg>
         </div>
 
-        <div className="region-info-box">
+
+        {/* info box that updates based on which region is being hovered over */}
+        <div className="region-info-box card">
           {hoverRegion ? (
             <h3>{hoverRegion}</h3>
           ) : (

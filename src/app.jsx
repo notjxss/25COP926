@@ -1,3 +1,5 @@
+{/* creates navigation links to all pages and renders the header and footer on every page */}
+  
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
