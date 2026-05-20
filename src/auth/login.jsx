@@ -71,7 +71,6 @@ export default function Login() {
         );
 >>>>>>> Stashed changes
       }
-
     } catch (err) {
       // network/server unreachable
       console.error("Network error:", err);

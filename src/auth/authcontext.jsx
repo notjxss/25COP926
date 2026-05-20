@@ -3,7 +3,6 @@ import { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  /* user is set to variable user, otherwise null */
   const [user, setUser] = useState(null);
 
 <<<<<<< Updated upstream
@@ -13,26 +12,29 @@ export function AuthProvider({ children }) {
   // restore login on page load
 >>>>>>> Stashed changes
   useEffect(() => {
-    const saved = localStorage.getItem("user");
-    if (saved) setUser(JSON.parse(saved));
-  }, []);
-  /* runs on first render */
+    const storedId = localStorage.getItem("user_id");
+    const storedName = localStorage.getItem("firstname");
 
-<<<<<<< Updated upstream
+    if (storedId && storedName) {
+      setUser({
+        id: storedId,
+        firstname: storedName
+      });
+    }
+  }, []);
+
   const login = (username) => {
     const u = { username };
-=======
-  // called after successful login
-  const login = (firstname, user_id) => {
-    const u = { firstname, id: user_id };
->>>>>>> Stashed changes
     setUser(u);
-    localStorage.setItem("user", JSON.stringify(u));
+
+    localStorage.setItem("firstname", firstname);
+    localStorage.setItem("user_id", user_id);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("firstname");
+    localStorage.removeItem("user_id");
   };
 
   return (

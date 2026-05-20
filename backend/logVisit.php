@@ -9,9 +9,8 @@ $user_id = $data['user_id'] ?? null;
 $area_name = $data['area_name'] ?? null;
 
 // if user is not logged in, then it fails
+=======
 if (!$user_id || !$area_name) {
-    echo json_encode(["success" => false, "error" => "Missing fields"]);
-    exit;
 }
 
 $sql = "INSERT INTO visits (user_id, area_name) VALUES (?, ?)";

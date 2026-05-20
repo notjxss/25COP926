@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import roadMap from "../Images/road-map.png";
+import { AuthContext } from "../auth/authcontext";
+import FactBox from "../components/factBox";
 
 export default function Explore() {
   const { user } = useContext(AuthContext);
@@ -52,7 +54,7 @@ export default function Explore() {
               />
             </Link>
 
-            <Link to="/shop">
+            <Link to="/shop" onClick={() => logVisit("Supermarket")}>
               <polygon
                 points="680.4,0 1344.7,0 1192.8,101.5 1181.6,164.5 1061.2,276.5 705.6,137.9"
                 className="viewpoly"
@@ -61,7 +63,7 @@ export default function Explore() {
               />
             </Link>
 
-            <Link to="/fuels">
+            <Link to="/fuels" onClick={() => logVisit("Fuel Station")}>
               <polygon
                 points="1399.3,161.7 1399.3,389.2 1204,374.5 1127,331.8 1201.9,240.8 1294.3,171.5"
                 className="viewpoly"
@@ -70,7 +72,7 @@ export default function Explore() {
               />
             </Link>
 
-            <Link to="/town-hall">
+            <Link to="/townhall" onClick={() => logVisit("Town Hall")}>
               <polygon
                 points="898.8,690.2 1176.7,758.1 1208.2,847 1201.9,926.1 1071,926.1 888.3,868.7"
                 className="viewpoly"
@@ -79,7 +81,7 @@ export default function Explore() {
               />
             </Link>
 
-            <Link to="/station">
+            <Link to="/station" onClick={() => logVisit("Transport Station")}>
               <polygon
                 points="249.2,774.9 509.6,722.4 744.8,637 824.6,692.3 824.6,926.1 199.5,926.1 169.4,845.6"
                 className="viewpoly"
@@ -94,16 +96,17 @@ export default function Explore() {
         {/* info box that updates based on which region is being hovered over */}
         <div className="region-info-box card">
           {hoverRegion ? (
-            <h3>{hoverRegion}</h3>
+            <>
+              <h3>{hoverRegion}</h3>
+              <p>{regionInfo[hoverRegion]}</p>
+            </>
           ) : (
             <p>Hover over a region to see details</p>
           )}
         </div>
       </div>
-      
-      <div className="facts">
-          <h2>temp text ayyayaya</h2>
-        </div>
+
+      <FactBox />
     </>
   );
 }

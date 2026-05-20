@@ -1,6 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authcontext";
 import { useNavigate } from "react-router-dom";
+import BadgeTooltip from "../components/badgeTooltip";
+import FactBox from "../components/factBox";
 
 export default function Profile() {
   const { user } = useContext(AuthContext);

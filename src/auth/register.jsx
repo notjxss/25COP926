@@ -59,7 +59,7 @@ export default function Register() {
 >>>>>>> Stashed changes
         setError("");
 
-        // optional: redirect after 1 second
+        // redirect after 1 second
         setTimeout(() => navigate("/profile"), 1000);
 
       } else {
