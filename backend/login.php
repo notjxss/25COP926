@@ -6,6 +6,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $username = $data["username"] ?? null;
 $password = $data["password"] ?? null;
 
+// if any field is missing, return error
 if (!$username || !$password) {
     http_response_code(400);
     echo json_encode(["error" => "Missing fields"]);
