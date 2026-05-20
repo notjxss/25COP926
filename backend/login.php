@@ -41,10 +41,11 @@ if (!password_verify($password, $user["password_hash"])) {
 }
 
 echo json_encode([
-    "id" => $user["id"],
-    "username" => $user["username"],
+    "success" => true,
+    "user_id" => $user["id"],
     "firstname" => $user["firstname"],
     "lastname" => $user["lastname"],
-    "email" => $user["email"]
+    "email" => $user["email"],
+    "username" => $user["username"]
 ]);
 ?>

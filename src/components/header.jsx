@@ -1,14 +1,12 @@
 import { NavLink } from "react-router-dom";
 import AuthPanel from "../auth/authpanel";
-import logo from "../Images/IMG_9946.PNG";
+import logo from "../Images/logo.PNG";
 
 
 export default function Header({ onSignIn, onRegister }) {
   return (
     <header>
-      <div id="logo">
-        <img src={logo} alt="Logo" id="site-logo" />
-      </div>
+      <img src={logo} alt="Logo" id="site-logo" />
 
       <div id="auth-buttons">
         <AuthPanel />
